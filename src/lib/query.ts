@@ -7,7 +7,7 @@ export const query = (path: string) =>{
   const url = `${INFOJOBS_API_ENDPOINT}${path}`;
   fetch(url, {
     headers: {
-      Authorization: `Bearer ${TOKEN}`,
+      Authorization: `Basic ${TOKEN}`,
       'content-type': 'application/json'
     }
   }).then(response => response.json())

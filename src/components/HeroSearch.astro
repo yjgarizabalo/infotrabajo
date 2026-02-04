@@ -1,6 +1,5 @@
 ---
 import SearchIcon from "@icons/Search.astro";
-import { getStudies } from "@lib/get-ti-studies";
 
 
 const SHORTCUTS = [
@@ -10,8 +9,13 @@ const SHORTCUTS = [
   { label: "🎒 Practicas", href: "/practicas" },
 ];
 
-const studies = await getStudies();
-console.log(studies);
+const STUDY_LEVELS = [
+  { value: "1", label: "✏️ Bachillerato" },
+  { value: "2", label: "🎓 Profesional" },
+  { value: "3", label: "💻 Tecnólogo" },
+  { value: "4", label: "⚛️ Técnico" },
+  { value: "5", label: "👨‍🏫 Maestría" },
+];
 ---
 
 <section class="mx-auto max-w-7xl px-4 w-full">
@@ -30,11 +34,9 @@ console.log(studies);
             id=""
           >
             <option value="" disabled selected>Nivel de estudio</option>
-            <option value="1">Bachiilerato</option>
-            <option value="2">Profesional</option>
-            <option value="3">Tecnologo</option>
-            <option value="4">Tecnico</option>
-            <option value="5">Maestria</option>
+            {STUDY_LEVELS.map((study) => (
+              <option value={study.value}>{study.label}</option>
+            ))}
           </select>
         </div>
 

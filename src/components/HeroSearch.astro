@@ -1,5 +1,6 @@
 ---
 import SearchIcon from "@icons/Search.astro";
+import SectionContainer from "@components/SectionContainer.astro";
 
 
 const SHORTCUTS = [
@@ -19,8 +20,7 @@ const STUDY_LEVELS = [
 ];
 ---
 
-<section class="mx-auto max-w-7xl px-4 w-full mb-20">
-  <div class="bg-hero-pattern mx-auto w-full rounded-3xl px-4 py-6">
+  <SectionContainer class="bg-hero-pattern rounded-3xl px-4 py-6">
     <h1
       class="text-black/80 font-semibold tracking[0.35px] text-2xl text-center pb-4"
     >
@@ -81,5 +81,4 @@ const STUDY_LEVELS = [
       }
       </div>
     </footer>
-  </div>
-</section>
+</SectionContainer>

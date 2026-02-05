@@ -1,4 +1,6 @@
 ---
+import SectionContainer from "@components/SectionContainer.astro"
+
 const  ARTICLES = [
   {
     title: "Cómo prepararte para una entrevista de trabajo técnica",
@@ -24,8 +26,7 @@ const  ARTICLES = [
 ---
 
 
-<section class="mx-auto max-w-7xl px-4 w-full mb-20">
-  <div class="mx-auto w-full" >  
+<SectionContainer>
     <h2 class="text-2xl pb-6">Preparte para ganar</h2>
     <div class="grid grid-cols-1 gap-4">
       {ARTICLES.map(({title, contentId, class: className}) => (
@@ -39,4 +40,4 @@ const  ARTICLES = [
       }
     </div>
   </div>
-</section>  
+</SectionContainer>  

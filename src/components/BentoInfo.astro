@@ -1,5 +1,42 @@
-<section class="mx-auto max-w-7xl px-4 w-full">
+---
+const  ARTICLES = [
+  {
+    title: "Cómo prepararte para una entrevista de trabajo técnica",
+    contentId: "entrevista-tecnica-2026",
+    class: "bg-yellow-100 text-yellow-800"  
+  },
+  {
+    title: "Las 10 habilidades más demandadas por los empleadores en 2024",
+    contentId: "habilidades-empleadores-2026",
+    class: "bg-red-100 text-red-800"
+  },
+  {
+    title: "Guía completa para crear un currículum vitae efectivo",
+    contentId: "guia-completa-para-crear-un-curriculum-vitae-efectivo",
+    class: "bg-sky-800 text-white/70"
+  },
+  {
+    title: "Sin experiencia laboral: Cómo destacar en tu búsqueda de empleo",
+    contentId: "sin-experiencia-laboral",
+    class: "bg-green-100 text-green-800"
+  }
+]
+---
+
+
+<section class="mx-auto max-w-7xl px-4 w-full mb-20">
   <div class="mx-auto w-full" >  
-    <h2>Preparte para ganar</h2>
+    <h2 class="text-2xl pb-6">Preparte para ganar</h2>
+    <div class="grid grid-cols-1 gap-4">
+      {ARTICLES.map(({title, contentId, class: className}) => (
+        <article class="aspect-square w-full flex">
+          <button class:list={["h-full p-4 rounded-2xl  flex justify-start", className]}>
+            <h4 class="font-medium text-2xl text-left text-pretty tracking-[0.35px] pr-3">{title}</h4>
+          </button>
+
+        </article>
+      ))
+      }
+    </div>
   </div>
 </section>  

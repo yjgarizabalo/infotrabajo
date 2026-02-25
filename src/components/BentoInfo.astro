@@ -1,46 +1,165 @@
 ---
 import SectionContainer from "@components/SectionContainer.astro";
+import Subtitle from "@components/Subtitle.astro";
 
 const ARTICLES = [
   {
     title: "Cómo prepararte para una entrevista de trabajo técnica",
     contentId: "entrevista-tecnica-2026",
-    class: "bg-yellow-100 text-yellow-800",
+    class:
+      "bg-gradient-to-r from-[#fef6db] to-[#fce197] text-ij-yellow md:aspect-[16/8] md:col-span-2 md:row-span-1 h-full",
+    image: "/bento-info/selection-process.webp",
+    imageClass:
+      "w-full h-auto object-contain object-bottom md:h-auto md:w-auto md:object-right md:max-h-none",
+    action: "modal",
+    track: "blog_selection_process",
   },
   {
     title: "Las 10 habilidades más demandadas por los empleadores en 2024",
     contentId: "habilidades-empleadores-2026",
-    class: "bg-red-100 text-red-800",
+    class:
+      "bg-gradient-to-r from-[#ffd2d2] to-[#f9b395] text-ij-red md:col-start-3 md:row-span-2 md:h-full",
+    image: "/bento-info/emergent-positions.webp",
+    imageClass:
+      "w-full h-full object-cover object-[center_30%] md:object-center",
+    action: "modal",
+    track: "blog_emerging_jobs",
   },
   {
     title: "Guía completa para crear un currículum vitae efectivo",
     contentId: "guia-completa-para-crear-un-curriculum-vitae-efectivo",
-    class: "bg-sky-800 text-white/70",
+    class: "bg-sky-800 text-white md:h-row-span-1",
+    image: "/bento-info/company-opinion.webp",
+    imageClass: "w-full h-full object-cover",
+    action: "modal",
+    track: "blog_cv_guide",
   },
   {
     title: "Sin experiencia laboral: Cómo destacar en tu búsqueda de empleo",
     contentId: "sin-experiencia-laboral",
-    class: "bg-green-100 text-green-800",
+    class:
+      "bg-gradient-to-r from-[#e6f6ee] to-[#8bcfad] text-ij-green md:h-row-span-1 md:h-full",
+    image: "/bento-info/no-experience.webp",
+    imageClass: "w-3/4 h-auto object-contain mb-4",
+    action: "modal",
+    track: "blog_no_experience",
   },
 ];
 ---
 
 <SectionContainer>
-  <h2 class="text-2xl pb-6">Preparte para ganar</h2>
-  <div class="grid grid-cols-1 gap-4">
+  <Subtitle>Prepárate para ganar</Subtitle>
+  <div class="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 md:p-0">
     {
-      ARTICLES.map(({ title, contentId, class: className }) => (
-        <button
-          class:list={[
-            "aspect-square w-full h-full p-4 rounded-2xl  flex justify-start hover:scale-102 transition",
-            className,
-          ]}
-        >
-          <span class="font-medium text-2xl text-left text-pretty tracking-[0.35px] pr-3">
-            {title}
-          </span>
-        </button>
-      ))
+      ARTICLES.map(
+        ({
+          class: className,
+          title,
+          contentId,
+          image,
+          imageClass,
+          action,
+          track,
+        }) => (
+          <button
+            class:list={[
+              "aspect-square w-full h-full rounded-2xl overflow-hidden relative group",
+              className,
+            ]}
+            data-content-id={contentId}
+            data-track={track}
+          >
+            <div
+              class:list={[
+                "absolute inset-0 flex overflow-hidden p-0",
+                contentId === "entrevista-tecnica-2026"
+                  ? "items-end justify-center md:items-stretch md:justify-end"
+                  : "",
+                contentId === "habilidades-empleadores-2026"
+                  ? "items-start md:items-center"
+                  : "",
+                contentId === "sin-experiencia-laboral"
+                  ? "items-end justify-center"
+                  : "items-end justify-end",
+              ]}
+            >
+              <img
+                src={image}
+                alt=""
+                class:list={[
+                  "transition-transform duration-300 ease-in-out group-hover:scale-110",
+                  imageClass,
+                  contentId === "entrevista-tecnica-2026"
+                    ? "max-h-[70%] md:max-h-none md:h-full md:w-auto md:pr-0"
+                    : "",
+                ]}
+              />
+            </div>
+            <div class="absolute inset-0 p-4 flex flex-col justify-start items-start z-10">
+              <span class="font-medium text-3xl text-left text-pretty tracking-separated pr-3 md:max-w-64">
+                {title}
+              </span>
+            </div>
+          </button>
+        )
+      )
     }
   </div>
 </SectionContainer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // modal
+    const $modal = document.getElementById("infographic-modal");
+    const $modalBody = document.getElementById("infographic-modal-body");
+    const $btnModal = document.getElementById("btn-modal");
+    const $body = document.body;
+
+    // buttons bento
+    const $buttons = document.querySelectorAll("button[data-content-id]");
+
+    const openModal = (id: string) => {
+      const contentId = `infographic-${id}`;
+      const content = document.getElementById(contentId);
+
+      if (content && $modalBody) {
+        $modal?.classList.add("modal-active");
+        $modalBody.replaceChildren(content.cloneNode(true));
+
+        $modalBody.firstElementChild?.classList.replace("hidden", "flex");
+
+        $body.style.overflow = "hidden";
+      }
+    };
+
+    const closeModal = () => {
+      if ($modal?.classList.contains("modal-active")) {
+        $modal?.classList.remove("modal-active");
+      }
+
+      const currentContent = $modalBody?.firstChild;
+
+      if (currentContent) {
+        $modalBody?.removeChild(currentContent);
+      }
+
+      $body.style.overflow = "";
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeModal();
+      }
+    };
+
+    $buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const id = button.getAttribute("data-content-id");
+        if (id) openModal(id);
+      });
+    });
+
+    $btnModal?.addEventListener("click", () => closeModal());
+    document.addEventListener("keydown", handleKeyDown);
+  });
+</script>

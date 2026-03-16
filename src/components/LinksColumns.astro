@@ -1,0 +1,132 @@
+---
+const linksInfo = [
+  {
+    title: "Nosotros",
+    links: [
+      {
+        label: "Ayuda",
+        href: "https://ayuda.infotrabajo.co/hc/es",
+        showOnMobile: true,
+      },
+      {
+        label: "Seguridad",
+        href: "https://nosotros.infotrabajo.co/seguridad",
+      },
+      {
+        label: "Condiciones legales",
+        href: "https://www.infotrabajo.co/condiciones-legales",
+        showOnMobile: true,
+      },
+      {
+        label: "Política de privacidad",
+        href: "https://www.infotrabajo.co/politica-privacidad",
+      },
+
+      {
+        label: "Uso del servicio",
+        href: "https://www.infotrabajo.co/uso-del-servicio",
+      },
+      {
+        label: "Política de cookies",
+        href: "https://www.infotrabajo.co/politica-cookies",
+      },
+      {
+        label: "Gestión de cookies",
+        href: "https://www.infotrabajo.co/gestion-cookies",
+      },
+    ],
+  },
+  {
+    title: "Sobre InfoTrabajo",
+    links: [
+      {
+        label: "InfoTrabajo hoy",
+        href: "https://nosotros.infotrabajo.co/",
+      },
+      {
+        label: "Trabaja con nosotros",
+        href: "https://www.infotrabajo.co/trabaja-con-nosotros",
+      },
+      {
+        label: "Ofertas de empleo en Colombia",
+        href: "https://www.infotrabajo.co/ofertas-empleo",
+      },
+    ],
+  },
+  {
+    title: "+ InfoTrabajo",
+    links: [
+      {
+        label: "InfoTrabajo Awards",
+        href: "https://awards.infotrabajo.co/",
+      },
+      {
+        label: "InfoTrabajo Academy",
+        href: "https://academy.infotrabajo.co/",
+      },
+      {
+        label: "Orientación laboral",
+        href: "https://orientacion-laboral.infotrabajo.co/",
+      },
+      {
+        label: "InfoTrabajo Formación",
+        href: "https://formacion.infotrabajo.co/",
+      },
+      {
+        label: "Blog empresas",
+        href: "https://recursos-humanos.infotrabajo.co/",
+      },
+    ],
+  },
+  {
+    title: "Prensa",
+    links: [
+      {
+        label: "Indicadores de InfoTrabajo",
+        href: "https://nosotros.infotrabajo.co/indicadores",
+      },
+      {
+        label: "Notas de prensa",
+        href: "https://nosotros.infotrabajo.co/prensa/notas-prensa",
+      },
+      {
+        label: "Contacto de prensa",
+        href: "https://nosotros.infotrabajo.co/contacto-prensa",
+      },
+    ],
+  },
+]
+---
+
+<div
+  class="px-[40px] items-center md:justify-between md:items-start flex flex-col md:flex-row"
+>
+  {
+    linksInfo.map(({ title, links }, index) => {
+      return (
+        <div class={`${index === 0 ? "" : "hidden sm:block"}`}>
+          <h2 class="text-black font-semibold text-[18px] hidden md:block mb-2">
+            {title}
+          </h2>
+
+          <ul class="flex flex-row  md:flex-col underline md:no-underline gap-4 md:gap-0">
+            {links.map(({ label, href, showOnMobile }) => {
+              return (
+                <li
+                  class:list={[
+                    `mb-2 hover:underline hover:underline-offset-[3px]`,
+                    showOnMobile ? "" : "hidden md:block",
+                  ]}
+                >
+                  <a href={href} class="text-[14px] leading-6" target="_blank" rel="noopener noreferrer" aria-label={label}>
+                    {label}
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      )
+    })
+  }
+</div>
